@@ -11,12 +11,9 @@
         }
     </style>
     <!-- Bootstrap CSS -->
-    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css" rel="stylesheet">
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-    <!--[if lt IE 9]>
-    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
     <![endif]-->
 </head>
 
@@ -32,13 +29,22 @@
         </div>
         <button type="button" onclick="addProduct()" class="btn btn-success">Add</button>
     </form>
+
+
+    <!-- Modal -->
+
+
+
+
     <hr>
     <label>List Product</label>
 
     <div id="result">
 
     </div>
+    <div id="modal">
 
+    </div>
 
     <script>
 
@@ -52,7 +58,7 @@
                 list = "<tr>" +
                     "<th scope=\'row\'>" + (i + 1) + "<\/th>" +
                     "<td>" + product[i] + "<\/td>" +
-                    "<td><button type=\'button\' onclick=\'changeName("+i+")\' class=\'btn btn-success\'>Edit<\/button><\/td>" +
+                    "<td><button type=\'button\' onclick=\'changeName("+i+")\' class=\'btn btn-success\' data-toggle=\"modal\" data-target=\"#myModal\">Edit<\/button><\/td>" +
                     "<td><button type=\"button\" onclick=\'deleteProduct(" + i + ")\' class=\"btn btn-danger\">Delete<\/button><\/td>\n" +
                     "<\/tr>";
 
@@ -79,17 +85,34 @@
          }
 
          function changeName(a) {// Su kien bam vao nut Edit
-            // this.innerHTML = "<input type=\'text\' id=\'new_name\' value=\'"+product[a]+"\' autofocus>";
-             //this.innerHTML = "<button type=\"submit\" onclick=\'updateName("+a+")\' class=\"btn btn-warning\">Update</button>"
-            console.log(a);
+            document.getElementById('modal').innerHTML = "<div class=\"modal fade\" id=\"myModal\" role=\"dialog\">\n" +
+                "        <div class=\"modal-dialog\">\n" +
+                "\n" +
+                "            <!-- Modal content-->\n" +
+                "            <div class=\"modal-content\">\n" +
+                "                <div class=\"modal-header\">\n" +
+                "                    <button type=\"button\" class=\"close\" data-dismiss=\"modal\">&times;</button>\n" +
+                "                    <h4 class=\"modal-title\">Update Name Product</h4>\n" +
+                "                </div>\n" +
+                "                <div class=\"modal-body\">\n" +
+                "                    <input type=\"text\" name=\"\" id=\'new_name\' value='"+product[a]+"'>\n" +
+                "                </div>\n" +
+                "                <div class=\"modal-footer\">\n" +
+                "                    <button type=\"button\" class=\"btn btn-warning\" onclick='updateName("+a+")' data-dismiss=\"modal\">Update</button>\n" +
+                "                </div>\n" +
+                "            </div>\n" +
+                "\n" +
+                "        </div>\n" +
+                "    </div>"
          }
-         /*function updateName(a) { // Update name
+         function updateName(a) { // Update name
+
             new_name = document.getElementById('new_name').value;
 
             product[a] = new_name;
 
             displayProduct(product);
-         }*/
+         }
 
          function deleteProduct(index) {
 
@@ -108,9 +131,5 @@
         </div>
     </div>
 </div> <!-- /container -->
-<!-- jQuery -->
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-<!-- Bootstrap JavaScript -->
-<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.0/js/bootstrap.min.js"></script>
 </body>
 </html>
